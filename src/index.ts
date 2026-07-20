@@ -12,6 +12,8 @@ export { REMOTE_CONTRACT_VERSION } from './version';
 export type {
   ThemeMode,
   AppLocale,
+  HostSession,
+  HostLocation,
   TelemetryProps,
   HostTelemetry,
   HostBridge,

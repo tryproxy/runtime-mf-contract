@@ -15,39 +15,40 @@ export function createMockHostBridge(
   const locale: AppLocale = options.locale ?? 'en';
   const themeListeners = new Set<Listener>();
   const localeListeners = new Set<Listener>();
+  const authListeners = new Set<Listener>();
+  const navigationListeners = new Set<Listener>();
+
+  const subscribe = (set: Set<Listener>, listener: Listener) => {
+    set.add(listener);
+    return () => {
+      set.delete(listener);
+    };
+  };
 
   return {
     theme: {
       getSnapshot: () => ({ mode: theme }),
-      subscribe: (listener) => {
-        themeListeners.add(listener);
-        return () => {
-          themeListeners.delete(listener);
-        };
-      },
+      subscribe: (listener) => subscribe(themeListeners, listener),
     },
     i18n: {
-      getLocale: () => locale,
-      subscribe: (listener) => {
-        localeListeners.add(listener);
-        return () => {
-          localeListeners.delete(listener);
-        };
-      },
+      getSnapshot: () => ({ locale }),
+      subscribe: (listener) => subscribe(localeListeners, listener),
     },
     auth: {
-      getSession: () => ({
+      getSnapshot: () => ({
         userId: 'mock-user',
         displayName: 'Mock User',
         roles: ['admin'],
       }),
+      subscribe: (listener) => subscribe(authListeners, listener),
     },
     navigation: {
-      getLocation: () => ({
+      getSnapshot: () => ({
         pathname: '/',
         search: '',
         hash: '',
       }),
+      subscribe: (listener) => subscribe(navigationListeners, listener),
       navigate: () => {},
       replace: () => {},
     },

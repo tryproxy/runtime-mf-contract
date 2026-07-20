@@ -1,3 +1,3 @@
-export type { ThemeMode, AppLocale, HostBridge } from './host-bridge';
+export type { ThemeMode, AppLocale, HostSession, HostLocation, HostBridge } from './host-bridge';
 export type { TelemetryProps, HostTelemetry } from './telemetry';
 export type { RemoteAppInstance, MountRemoteApp } from './mount';
