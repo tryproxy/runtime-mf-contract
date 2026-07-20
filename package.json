@@ -1,7 +1,7 @@
 {
   "name": "@platform/runtime-mf-contract",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "files": [
     "dist"
@@ -20,7 +20,8 @@
     "build": "tsc --noEmit && vite build",
     "types": "tsc --noEmit",
     "preview": "vite preview",
-    "release": "bumpp"
+    "release": "bumpp",
+    "prepare": "pnpm build"
   },
   "devDependencies": {
     "bumpp": "^11.1.0",
