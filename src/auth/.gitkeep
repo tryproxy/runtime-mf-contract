@@ -1,0 +1,2 @@
+# Reserved for future auth transport types (auth.http: bearer | cookie).
+# Keep HostBridge identity types in contract/ until this slice lands.

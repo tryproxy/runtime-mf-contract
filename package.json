@@ -1,0 +1,31 @@
+{
+  "name": "@platform/runtime-mf-contract",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/runtime-mf-contract.js",
+  "module": "./dist/runtime-mf-contract.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/runtime-mf-contract.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "types": "tsc --noEmit",
+    "preview": "vite preview",
+    "release": "bumpp"
+  },
+  "devDependencies": {
+    "bumpp": "^11.1.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.1",
+    "vite-plugin-dts": "^5.0.3"
+  }
+}
