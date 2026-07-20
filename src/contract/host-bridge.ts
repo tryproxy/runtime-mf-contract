@@ -1,4 +1,5 @@
 import type { HostTelemetry } from './telemetry';
+import type { HostAuthHttp } from '../auth';
 
 export type ThemeMode = 'light' | 'dark';
 export type AppLocale = 'en' | 'ru';
@@ -33,6 +34,8 @@ export type HostBridge = {
   auth: {
     getSnapshot(): HostSession | null;
     subscribe(listener: () => void): () => void;
+    /** Credential transport — remotes use this; never localStorage. */
+    http: HostAuthHttp;
   };
 
   navigation: {

@@ -5,6 +5,8 @@ type Listener = () => void;
 export type MockHostBridgeOptions = {
   theme?: ThemeMode;
   locale?: AppLocale;
+  /** Mock bearer token for standalone remotes / tests. */
+  accessToken?: string | null;
 };
 
 /** In-memory HostBridge for standalone remotes / tests (no real shell). */
@@ -13,6 +15,7 @@ export function createMockHostBridge(
 ): HostBridge {
   const theme: ThemeMode = options.theme ?? 'light';
   const locale: AppLocale = options.locale ?? 'en';
+  const accessToken = options.accessToken ?? 'mock-access-token';
   const themeListeners = new Set<Listener>();
   const localeListeners = new Set<Listener>();
   const authListeners = new Set<Listener>();
@@ -35,12 +38,19 @@ export function createMockHostBridge(
       subscribe: (listener) => subscribe(localeListeners, listener),
     },
     auth: {
-      getSnapshot: () => ({
-        userId: 'mock-user',
-        displayName: 'Mock User',
-        roles: ['admin'],
-      }),
+      getSnapshot: () =>
+        accessToken
+          ? {
+              userId: 'mock-user',
+              displayName: 'Mock User',
+              roles: ['admin'],
+            }
+          : null,
       subscribe: (listener) => subscribe(authListeners, listener),
+      http: {
+        mode: 'bearer',
+        getAccessToken: async () => accessToken,
+      },
     },
     navigation: {
       getSnapshot: () => ({
