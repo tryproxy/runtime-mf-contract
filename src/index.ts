@@ -2,7 +2,7 @@
  * Public API for `@platform/runtime-mf-contract`.
  *
  * Layout:
- * - `contract/` — HostBridge + mount + telemetry types (PoC surface)
+ * - `contract/` — HostBridge + mount + telemetry + NavManifest types (PoC surface)
  * - `auth/` — auth.http transport types
  * - `mock/` — in-memory bridge for standalone remotes / tests
  * - `version/` — REMOTE_CONTRACT_VERSION
@@ -21,6 +21,9 @@ export type {
   HostBridge,
   RemoteAppInstance,
   MountRemoteApp,
+  NavManifest,
+  NavManifestPage,
+  NavManifestLabel,
 } from './contract';
 export {
   createMockHostBridge,
